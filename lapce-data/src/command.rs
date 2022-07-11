@@ -296,6 +296,10 @@ pub enum LapceWorkbenchCommand {
     #[strum(serialize = "show_panel")]
     ShowPanel,
 
+    #[strum(serialize = "show_documentation")]
+    #[strum(message = "Show documentation for item under the cursor")]
+    ShowDocumentation,
+
     /// Toggles the panel passed in parameter.
     #[strum(serialize = "toggle_panel_focus")]
     TogglePanelFocus,

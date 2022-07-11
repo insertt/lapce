@@ -603,3 +603,7 @@ mode = "v"
 key = "<"
 command = "outdent_line"
 mode = "v"
+
+[[keymaps]]
+key = "ctrl+q"
+command = "show_documentation"

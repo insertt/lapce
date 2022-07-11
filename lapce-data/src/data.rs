@@ -1255,6 +1255,9 @@ impl LapceTabData {
                     }
                 }
             }
+            LapceWorkbenchCommand::ShowDocumentation => {
+                self.show_documentation(ctx);
+            }
             LapceWorkbenchCommand::SourceControlInit => {
                 self.proxy.git_init();
             }
@@ -1517,6 +1520,20 @@ impl LapceTabData {
             self.hide_panel(ctx, kind);
         } else {
             self.show_panel(ctx, kind);
+        }
+    }
+
+    fn show_documentation(&mut self, ctx: &mut EventCtx) {
+        if let Some(editor) = self
+            .main_split
+            .active
+            .and_then(|active_id| self.main_split.editors.get(&active_id).cloned())
+        {
+            let mut editor_data = self.editor_view_content(editor.view_id);
+            let doc = editor_data.doc.clone();
+            let offset = editor.cursor.offset();
+            editor_data.update_hover(ctx, offset);
+            self.update_from_editor_buffer_data(editor_data, &editor, &doc);
         }
     }
 
